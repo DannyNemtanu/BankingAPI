@@ -42,7 +42,7 @@ function loadAccounts() {
                         '<td id="showAccType">'+type+'</td>'+
                         '<td id="showAccSortCode">'+sortCode+'</td>'+
                         '<td id="showAccBalance">'+balance+'</td>'+
-                        '<td><button type="button" id="showTransactions" class="w-100 btn btn-primary">Show</button></td>'+
+                        '<td><button type="button" " id="'+id+'" onclick="getTransactions(this.id)" class="w-100 btn btn-primary">Show</button></td>'+
                         '<td><button type="button" id="deleteAccount" class="w-100 btn btn-danger">Delete</button></td>'+
                     '</tr>'
                 );
@@ -50,6 +50,33 @@ function loadAccounts() {
           });   
     });
  };
+ 
+ function getTransactions(accountId){
+     $.get("/api/account/transactions?id="+accountId, function (data) {
+        var transaction = $(data).find("transaction").filter(function(){
+              var id = $('id', this).text();
+              var type = $('type', this).text();
+              var description = $('description', this).text();
+              var date = $('date', this).text();
+              var amount = $('amount', this).text();
+              var toAccount = $('toAccount', this).text();
+              var fromAccount = $('fromAccount', this).text();
+              
+            $(".transaction-table #transactionHTML").append(
+                    '<tr>'+
+                        '<th scope="row">'+id+'</th>'+
+                        '<td>'+type+'</td>'+
+                        '<td>'+description+'</td>'+
+                        '<td>'+date+'</td>'+
+                        '<td>'+amount+'</td>'+
+                        '<td>'+fromAccount+'</td>'+
+                        '<td>'+toAccount+'</td>'+
+                    '</tr>'
+                );
+              console.log("id: "+id+ "\ntype:"+type+"\ndesc:"+description+"\namount:"+amount);
+          });   
+    });
+};
 
 $("#login").click(function (e) {
     e.preventDefault();

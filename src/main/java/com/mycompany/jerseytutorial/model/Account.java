@@ -6,70 +6,66 @@
 
 package com.mycompany.jerseytutorial.model;
 
-import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Account{
     
     private int id;
-    private String type;
+    private String type; //Saving - Current
     private int number;
     private double balance;
-    private ArrayList<Transaction> transactions;
+    private int customerId;
     
     public Account(){
-        transactions = new ArrayList<>();
+       
     }
-    
-    public Account(int id, String type, int number, double balance){
+
+    public Account(int id, String type, int number, double balance, int customerId) {
         this.id = id;
         this.type = type;
         this.number = number;
         this.balance = balance;
-        transactions = new ArrayList<>();
-    }
-    
-    public Account(int id, String type, int number){
-        this.id = id;
-        this.type = type;
-        this.number = number;
-        transactions = new ArrayList<>();
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
+        this.customerId = customerId;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getNumber() {
         return number;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public double getBalance() {
         return balance;
     }
-    public void addTransaction(Transaction transaction){
-        transactions.add(transaction);
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 }

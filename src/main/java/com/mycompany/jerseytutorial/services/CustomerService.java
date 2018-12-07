@@ -17,10 +17,7 @@ import java.util.Random;
 public class CustomerService {
     public static ArrayList<Customer> cust = new ArrayList<>();
     public static boolean init = true;
-    
-
-    
-    
+    Random rnd = new Random();
     
     public CustomerService(){
         if(init){
@@ -42,56 +39,52 @@ public class CustomerService {
     }
     public Customer getCustomer(int id) {
         Customer temp = new Customer();
-        int tempId = 0;
-        for(int i = 0; i<cust.size();i++){
-            temp = cust.get(i);
-            tempId = temp.getId();
-            if(id == tempId){
-                temp = cust.get(i);
-                break;
-            }else{
-                temp = null;
+        for(Customer nc : getAllCustomers()){
+            int tempID = nc.getId();
+            if (tempID == id) {
+               temp = nc;
+               break;
             }
         }
         return temp;
     }
     
     public void deleteCustomer(int id) {
-        Customer temp;
-        int tempId = 0;
-        for(int i = 0; i<cust.size();i++){
-            temp = cust.get(i);
-            tempId = temp.getId();
-            if(id == tempId){
-                cust.remove(i);
-                break;
-            }else{
-                temp = null;
+        for(Customer nc : getAllCustomers()){
+            if (nc.getId() == id) {
+               cust.remove(nc);
+               break;
             }
         }
     }
 
-    public void editCustomer(int id, int password){
+    public void editCustomer(int id, String name, String email, String address, int password){
         Customer temp;
         int tempId = 0;
         for(int i = 0; i<cust.size();i++){
             temp = cust.get(i);
             tempId = temp.getId();
             if(id == tempId){
-                String name = temp.getName();
-                String address = temp.getAddress();
-                String email = temp.getEmail();
-                Customer updatedCustomer = new Customer(id,name,address,email,password);
+                if(!name.isEmpty()){
+                    temp.setName(name);
+                }
+                if(!email.isEmpty()){
+                    temp.setEmail(email);
+                }
+                if(!address.isEmpty()){
+                    temp.setEmail(email);
+                }
+                if(password > 0){
+                    temp.setPassword(password);
+                }
+                
+                Customer updatedCustomer = new Customer(temp.getId(),temp.getName(),temp.getAddress(),temp.getEmail(),temp.getPassword());
                 cust.set(i, updatedCustomer);
-                break;
-            }else{
-                temp = null;
             }
         }
     }
  
     public void addCustomer(int id,String name, String address, String email, int password){
-        
         Customer newCustomer = new Customer(id, name, address, email, password);
         cust.add(newCustomer);
     }

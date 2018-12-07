@@ -6,23 +6,33 @@
 
 package com.mycompany.jerseytutorial.model;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Transaction{
     private int id;
-    private String type;
-    private String description;
+    private String type; //Lodgement - Transfer - Withdrawal
+    private String description; //Transaction Name
+    private Date date;
     private double amount;
-
+    private int fromAccount;
+    private int toAccount;
+    
     public Transaction() {
     }
 
-    public Transaction(int id, String type, String description, double amount) {
+    public Transaction(int id, String type, String description, double amount, Date date, int toAccount,int fromAccount) {
         this.id = id;
         this.type = type;
         this.description = description;
         this.amount = amount;
+        this.date = new Date();
+        this.toAccount = toAccount;
+        this.fromAccount = fromAccount;
     }
 
     public Transaction(int i, String dan_Nemtanu, int i0) {
@@ -60,7 +70,28 @@ public class Transaction{
     public double getAmount() {
         return amount;
     }
-    
-    
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(int fromAccount) {
+        this.fromAccount = fromAccount;
+    }
+
+    public int getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(int toAccount) {
+        this.toAccount = toAccount;
+    }
+    
 }

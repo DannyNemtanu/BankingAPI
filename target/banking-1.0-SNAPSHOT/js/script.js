@@ -28,13 +28,32 @@ $("#formsubmit").click(function () {
     });
 });
 
+function loadAccounts() {
+    $("#loadAccounts").addClass("disabled");
+    $.get("/api/account/all", function (data) {
+        var account = $(data).find("account").filter(function(){
+              var id = $('id', this).text();
+              var type = $('type', this).text();
+              var sortCode = $('number', this).text();
+              var balance = $('balance', this).text();
+              $("#accountHTML").append(
+                    '<tr>'+
+                        '<th scope="row" id="showAccID">'+id+'</th>'+
+                        '<td id="showAccType">'+type+'</td>'+
+                        '<td id="showAccSortCode">'+sortCode+'</td>'+
+                        '<td id="showAccBalance">'+balance+'</td>'+
+                        '<td><button type="button" id="showTransactions" class="w-100 btn btn-primary">Show</button></td>'+
+                        '<td><button type="button" id="deleteAccount" class="w-100 btn btn-danger">Delete</button></td>'+
+                    '</tr>'
+                );
+              console.log("id: "+id+ "\ntype:"+type+"\nnumber:"+sortCode+"\nbalance:"+balance);
+          });   
+    });
+ };
+
 $("#login").click(function (e) {
     e.preventDefault();
     customerID = $("#customerID").val();
     var pass = $("#customerPassword").val();
     $(location).attr('href', 'http://localhost:49000/customer_main.html');
 });
-
-// Displaying Details 
-console.log("Customer ID: " + customerID);
-$("#globalID").innerHTML = customerID;

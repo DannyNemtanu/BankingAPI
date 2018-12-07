@@ -7,7 +7,10 @@
 package com.mycompany.jerseytutorial.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
-
+/**
+ *
+ * @author dannemtanu
+ */
 @XmlRootElement
 public class Account{
     

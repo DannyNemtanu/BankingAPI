@@ -9,7 +9,10 @@ package com.mycompany.jerseytutorial.model;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+/**
+ *
+ * @author dannemtanu
+ */
 @XmlRootElement
 public class Customer{
     

@@ -68,45 +68,5 @@ public class AccountResource {
     @Path("/transactions")
     public List<Transaction> getAccountTransactions(@QueryParam("id") int id) {
         return ts.getAccountTransaction(id);
-    }
-
-    // curl -v -X PUT http://localhost:49000/api/accounts/editaccount/2/25.50    
-//    @POST
-//    @Path("/edit")
-//        
-//        public Response updateAccount(@QueryParam("id") int id,
-//            @PathParam("newBalance") double newBalance) {
-//            as.editAccount(id, newBalance);
-//            System.out.println("Account id: " +id+ " is edited!");
-//
-//        return Response.status(200).build();
-//
-//    }
-//    
-//    // Method to add stuff to the database !!!!
-//    // curl -v -X PUT http://localhost:49000/api/accounts/addNewAccount/Savings
-//    @POST
-//    @Path("/addNewAccount/{type}")
-//        
-//    public Response addAccount(@PathParam("type") String type) {
-//
-//        
-//        Account account = new Account();
-//        account.setType(type);
-//        
-//        int num = 0;
-//        String flo = "";
-//        for(int i = 0; i < 9; i++)
-//            flo += (int)(Math.random()*10);
-//        num = Integer.parseInt(flo);
-//        account.setNumber(num);
-//        account.setType(type);
-//        account.setBalance(0.0);
-//        
-//        as.addAccount(account.getType(), account.getNumber(), account.getBalance());
-//
-//        return Response.status(200).build();
-//
-//    }
-    
+    }    
 }

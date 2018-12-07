@@ -11,7 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import javax.xml.bind.annotation.XmlRootElement;
-
+/**
+ *
+ * @author dannemtanu
+ */
 @XmlRootElement
 public class Transaction{
     private int id;
@@ -33,10 +36,6 @@ public class Transaction{
         this.date = new Date();
         this.toAccount = toAccount;
         this.fromAccount = fromAccount;
-    }
-
-    public Transaction(int i, String dan_Nemtanu, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setId(int id) {

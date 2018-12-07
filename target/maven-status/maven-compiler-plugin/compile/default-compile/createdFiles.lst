@@ -1,3 +1,9 @@
+com/mycompany/jerseytutorial/services/CustomerService.class
 com/mycompany/jerseytutorial/model/Customer.class
+com/mycompany/jerseytutorial/resources/AccountResource.class
+com/mycompany/jerseytutorial/services/AccountService.class
 com/mycompany/jerseytutorial/model/Transaction.class
+com/mycompany/jerseytutorial/services/TransactionService.class
+com/mycompany/jerseytutorial/resources/CustomerResource.class
 com/mycompany/jerseytutorial/model/Account.class
+com/mycompany/jerseytutorial/resources/TransactionResource.class

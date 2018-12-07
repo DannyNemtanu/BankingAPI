@@ -17,7 +17,7 @@
 
     </head>
     <body>
-        <div class="container-fluid p-0" style="height: 100vh">
+        <div class="container-fluid p-0" id="loginForm" style="height: 100vh">
             <div class="row">
                 <div class="col media p-0">
                     <div class="offset-2 col-8 offset-md-4 col-md-4 align-self-center" style="margin-top: 5%">
@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" id="customerPassword" placeholder="Password">
                             </div>
-                            <button type="button" id="login" class="w-100 btn btn-primary font-weight-bold">LOG IN</button>
+                            <button type="button" onclick="tryLogin()" class="w-100 btn btn-primary font-weight-bold">LOG IN</button>
                             <small class="form-text text-muted text-center mt-2 font-weight-bold">Don't have an account ?</small>
                             <a href="/index.html" class="w-100 btn btn-default font-weight-bold">REGISTER</a>
                         </form>
@@ -39,6 +39,44 @@
             </div>
         </div>
 
+        <div class="d-none" id="main-page">
+            <h1 class="w-100 text-center" >Welcome check your accounts !</h1>
+            <button type="button" onclick='loadAccounts()' id="loadAccounts" class="text-center btn btn-danger">Load Account</button>
+
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sort Code</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Transactions</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accountHTML">
+
+                    </tbody>
+                </table>
+                <table class="table table-hover transaction-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionHTML">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <script src="/js/script.js"></script>
     </body>
 </html>

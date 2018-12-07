@@ -18,8 +18,12 @@ function registerAccount() {
         console.log(data);
         alert("Account Created");
     });
-
 }
+function tryLogin(){
+    $("#loginForm").addClass("d-none");
+    $("#main-page").removeClass("d-none");
+}
+
 $("#formsubmit").click(function () {
     registerAccount();
     $.get("/api/customer/all", function (data) {
@@ -27,7 +31,6 @@ $("#formsubmit").click(function () {
         alert("Load was performed.");
     });
 });
-
 function loadAccounts() {
     $("#loadAccounts").addClass("disabled");
     $.get("/api/account/all", function (data) {

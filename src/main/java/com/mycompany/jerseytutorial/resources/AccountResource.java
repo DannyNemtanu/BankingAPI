@@ -66,6 +66,7 @@ public class AccountResource {
     }
     @GET
     @Path("/transactions")
+    //    http://localhost:49000/api/account/transactions?id=5812
     public List<Transaction> getAccountTransactions(@QueryParam("id") int id) {
         return ts.getAccountTransaction(id);
     }    

@@ -17,48 +17,264 @@
 
     </head>
     <body>
-        <div class="container-fluid p-0" style="height: 100vh">
+        <!--login form-->
+        <div class="container-fluid p-0" id="loginForm" style="height: 100vh">
             <div class="row">
                 <div class="col media p-0">
                     <div class="offset-2 col-8 offset-md-4 col-md-4 align-self-center" style="margin-top: 5%">
                         <h1 class="text-center font-weight-bold">BANKING SYSTEM</h1>
-                        <p class="text-center text-secondary">Please register here.</p>
-                        <form action="" method="post">
+                        <p class="text-center text-secondary">Please login here.</p>
+                        <form action="" method="get">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="full-name" placeholder="Full Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="add1" placeholder="Street Address">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-
-                                    <input type="text" class="form-control" id="add2" placeholder="County">
-                                </div>
-                                <div class="form-group col-md-6">
-
-                                    <input type="text" class="form-control" id="add3" placeholder="Country">
-                                </div>
+                                <input type="text" class="form-control" id="loginEmail" placeholder="Email Address">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email Address"
-                                       >
+                                <input type="password" class="form-control" id="loginPass" placeholder="Password">
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="pass" placeholder="Passowrd">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="c_password" placeholder="Confirm Password">
-                            </div>
-                            <button type="button" id="formsubmit" class="w-100 btn btn-primary font-weight-bold">REGISTER</button>
-                            <small class="form-text text-muted text-center mt-2 font-weight-bold">Already have an account ?</small>
-                            <a href="/login.html" class="w-100 btn btn-default font-weight-bold">SIGN IN</a>
+                            <button type="button" onclick="tryLogin()" class="w-100 btn btn-primary font-weight-bold">LOG IN</button>
+                            <small class="form-text text-muted text-center mt-2 font-weight-bold">Don't have an account ?</small>
+                            <a href="/register.html" class="w-100 btn btn-default font-weight-bold">REGISTER</a>
                         </form>
+                        <p class="w-100 text-center font-weight-bold" id="validation"></p>
                     </div>
                 </div>
             </div>
         </div>
+        <!--Customer page-->
+        <div class="d-none" id="main-page">
+            <h1 class="w-100 text-center" >Welcome check your accounts !</h1>
+            <button type="button" onclick='tryLogout()' id="logout" class="text-center btn btn-danger">Secure Logout</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAccount" data-whatever="@getbootstrap">Create Account</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeLodgement" data-whatever="@getbootstrap">Make Lodgement</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeWithdrawal" data-whatever="@getbootstrap">Make Withdrawal</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeTransfer" data-whatever="@getbootstrap">Make Transfer</button>
 
+            <!--Lodgement-->
+            <div class="modal fade" id="makeLodgement" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Make Lodgement</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="lodgement-form">
+                                <div class="form-group">
+                                    <label for="recipient-account" class="col-form-label">Account ID:</label>
+                                    <input type="text" class="form-control" id="recipient-account">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lodgement-amount" class="col-form-label">Amount €:</label>
+                                    <input type="text" class="form-control" id="lodgement-amount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lodgement-description" class="col-form-label">Transaction Description:</label>
+                                    <textarea class="form-control" id="lodgement-description"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="makeLodgement()" class="btn btn-primary">Make Lodgement</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Withdrawal-->
+            <div class="modal fade" id="makeWithdrawal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Make Withdrawal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="withdrawal-form">
+                                <div class="form-group">
+                                    <label for="withdrawal-account" class="col-form-label">Account ID:</label>
+                                    <input type="text" class="form-control" id="withdrawal-account">
+                                </div>
+                                <div class="form-group">
+                                    <label for="withdrawal-amount" class="col-form-label">Amount €:</label>
+                                    <input type="text" class="form-control" id="withdrawal-amount">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="makeWithdrawal()" class="btn btn-primary">Make Withdrawal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Transfer-->
+            <div class="modal fade" id="makeTransfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Make Transfer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="withdrawal-form">
+                                <div class="form-group">
+                                    <label for="from-account" class="col-form-label">From Account ID:</label>
+                                    <input type="text" class="form-control" id="from-account">
+                                </div>
+                                <div class="form-group">
+                                    <label for="to-account" class="col-form-label">To Account ID:</label>
+                                    <input type="text" class="form-control" id="to-account">
+                                </div>
+                                <div class="form-group">
+                                    <label for="transfer-amount" class="col-form-label">Amount €:</label>
+                                    <input type="text" class="form-control" id="transfer-amount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="transfer-description" class="col-form-label">Transfer Description:</label>
+                                    <textarea class="form-control" id="transfer-description"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="makeTransfer()" class="btn btn-primary">Make Transfer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Create Account-->
+            <div class="modal fade" id="createAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Make Transfer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="create-form">
+                                <div class="form-group">
+                                    <label for="create-email" class="col-form-label">Email Address:</label>
+                                    <input type="text" class="form-control" id="create-email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-pass" class="col-form-label">Password:</label>
+                                    <input type="text" class="form-control" id="create-pass">
+                                </div>
+                                <div class="form-group">
+                                    <label for="create-type" class="col-form-label">Type:</label>
+                                    <input type="text" class="form-control" id="create-type">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="createAccount()" class="btn btn-primary">Create Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sort Code</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Transactions</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accountHTML">
+
+                    </tbody>
+                </table>
+                <table class="table table-hover transaction-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionHTML">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Admin page-->
+        <div class="d-none" id="admin">
+            <h1 class="w-100 text-center" >Welcome to overview page!</h1>
+            <button type="button" onclick='loadAllCustomers()' id="loadAllCustomers" class="text-center btn btn-danger">Load All Customers</button>
+            <button type="button" onclick='loadAllAccounts()' id="loadAllAccounts" class="text-center btn btn-danger">Load All Accounts</button>
+            <button type="button" onclick='loadAllTransactions()' id="loadAllTransactions" class="text-center btn btn-danger">Load All Transactions</button>
+            <button type="button" onclick='tryLogout()' id="logout" class="text-center btn btn-danger">Secure Logout</button>
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Accounts</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminCustomers">
+
+                    </tbody>    
+                </table>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sort Code</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Transactions</th>
+                            <th scope="col">Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="adminAccounts">
+
+                    </tbody>
+                </table>
+                <table class="table table-hover transaction-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTransactions">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <script src="/js/script.js"></script>
     </body>
 </html>

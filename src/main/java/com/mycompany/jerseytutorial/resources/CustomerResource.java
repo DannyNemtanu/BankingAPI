@@ -32,7 +32,7 @@ public class CustomerResource {
     Random rnd = new Random();
     
     @GET
-    // curl -v -X GET http://localhost:49000/api/customer?id=123413
+    // curl -v -X GET http://localhost:49000/api/customer?id=6772
     public Response getCustomer(@QueryParam("id") int id) {
         Response response;
         if (id > 0) {
@@ -52,7 +52,7 @@ public class CustomerResource {
     
     @POST
     @Path("/delete")
-    // curl -v -X POST http://localhost:49000/api/customer/delete?id=123413
+    // curl -v -X POST http://localhost:49000/api/customer/delete?id=6772
     public Response deleteCustomer(@QueryParam("id") int id) {
         
         cs.deleteCustomer(id);
@@ -62,10 +62,10 @@ public class CustomerResource {
     
     @POST
     @Path("/edit")
-    // curl -v -X POST http://localhost:49000/api/customer/edit?id=123413&name=Dan N.&address=100A Mulvey Park&email=dan@nemtanu.com&password=123456
+    // curl -v -X POST http://localhost:49000/api/customer/edit?id=6772&name=Dan N.&address=100A Mulvey Park&email=dan@nemtanu.com&password=123456
     public void updateCustomer(@QueryParam("id") int id,
             @QueryParam("name") String name, @QueryParam("address") String address,
-            @QueryParam("email") String email, @QueryParam("password") int password) {
+            @QueryParam("email") String email, @QueryParam("password") String password) {
         
             cs.editCustomer(id,name,address,email,password);
     }
@@ -75,7 +75,7 @@ public class CustomerResource {
     @Path("/create")
     public Response addCustomer(
             @QueryParam("name") String name, @QueryParam("address") String address,
-            @QueryParam("email") String email, @QueryParam("password") int password) {
+            @QueryParam("email") String email, @QueryParam("password") String password) {
         
         int n = 100000 + rnd.nextInt(900000);
         Customer customer = new Customer();
@@ -93,7 +93,7 @@ public class CustomerResource {
     @POST
     @Path("/account")
     //    Create New Account
-    //    http://localhost:49000/api/customer/account?id=123413&type=Save
+    //    http://localhost:49000/api/customer/account?id=6772&type=Save
     public Response addCustomerAccount(@QueryParam("id") int id, @QueryParam("type") String type) {
         Account newAccount = new Account();
         int accountID = 100000 + rnd.nextInt(900000);
@@ -110,7 +110,7 @@ public class CustomerResource {
     
     @GET
     @Path("/accounts")
-    // curl -v -X GET http://localhost:49000/api/customer/accounts?id=123413
+    // curl -v -X GET http://localhost:49000/api/customer/accounts?id=6772
     public List<Account> getCustomerAccounts(@QueryParam("id") int id) {
         return as.getCustomerAccounts(id);
     }

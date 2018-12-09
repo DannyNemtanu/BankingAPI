@@ -29,11 +29,12 @@ public class TransactionResource {
     TransactionService ts = new TransactionService();
 
     @GET
+//    http://localhost:49000/api/transactions?id={id}
     public Response getTransaction(@QueryParam("id") int id) {
         return Response.status(200).entity((ts.getTransaction(id))).build();
     }
 
-    // curl -v -X GET http://localhost:49000/api/transactions/1
+    // curl -v -X GET http://localhost:49000/api/transactions/all
     @GET
     @Path("/all")
     public List<Transaction> getAllTransactions() {
@@ -42,6 +43,7 @@ public class TransactionResource {
 
     @POST
     @Path("/lodgement")
+    //http://localhost:49000/api/transaction/ledgement?account=14343&amount=50
     public Response Lodgement(@QueryParam("account") int accountID, @QueryParam("amount") int amount, @QueryParam("description") String description) {
         ts.lodgement(accountID, amount, description);
         return Response.status(200).entity("Lodgement Succesfully!").build();

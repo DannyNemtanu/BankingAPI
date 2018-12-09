@@ -146,7 +146,8 @@ public class AccountService {
             if (fromAcc == temp.getId()) {
                 Account updatedAccount = new Account(temp.getId(), temp.getType(), temp.getNumber(), temp.getBalance() - newBalance, temp.getCustomerId());
                 list.set(i, updatedAccount);
-            } else if (toAcc == temp.getId()) {
+            }
+            if (toAcc == temp.getId()) {
                 Account updatedAccount = new Account(temp.getId(), temp.getType(), temp.getNumber(), temp.getBalance() + newBalance, temp.getCustomerId());
                 list.set(i, updatedAccount);
             }

@@ -20,14 +20,14 @@ public class Customer{
     private String name;
     private String address;
     private String email;
-    private int password;
-    private ArrayList<Account> accounts;
+    private String password;
+    
 
     public Customer() {
-        accounts = new ArrayList<>();
+        
     }
 
-    public Customer(int id, String name, String address, String email, int password) {
+    public Customer(int id, String name, String address, String email, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -67,16 +67,12 @@ public class Customer{
         this.email = email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void addAccount(Account account){
-        accounts.add(account);
     }
     
 }
